@@ -3,6 +3,7 @@ import { v4 as uuid } from 'uuid';
 import bcrypt from "bcrypt"
 import generateToken from "../utils/generateToken.js";
 
+//signup
 export const signup = async (req,res) => {
     try{
         const {fullName,username,password,confirmPassword,gender} = req.body;
@@ -50,8 +51,7 @@ export const signup = async (req,res) => {
         console.log(error.message)
     }
 }
-
-
+//login
 export const login = async (req,res) => {
     try{
 const {username,password} = req.body;
@@ -74,6 +74,7 @@ res.status(500).json({error:"internal server error"})
     }
 }
 
+//logout
 export const logout = (req,res) => {
    try{
     res.cookie("jwt","",{maxAge:0})
