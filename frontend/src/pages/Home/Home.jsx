@@ -7,6 +7,7 @@ const Home = () => {
 <div className="flex sm:h-[450px] md:h-[550px] rounded-lg overflow-hidden">
 <Sidebar />
 <MessageContainer />
+
 </div>
 </>
 )

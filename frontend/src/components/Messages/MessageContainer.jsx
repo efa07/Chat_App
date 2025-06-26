@@ -28,12 +28,11 @@ export default MessageContainer
 
 const NoChataSelected = () => {
   return (
-    <div className='flex items-center justify-center w-full h-full'>
-      <div className='px-4 text-center sm:text-lg md:text-xl text-gray-200 font-semibold flex flex-col items-center gap-2'>
-<p>Welcome Efa </p>
-<p>Select a chat to start messageing</p>
+    <div className='bg-blue-100 rounded-2xl flex items-center justify-center w-full h-full'>
+      <div className="flex justify-center items-center w-[240px] h-[360px] relative overflow-hidden rounded-[20px] border border-white/30 shadow-[0_8px_32px_rgba(0,0,0,0.1),inset_0_1px_0_rgba(255,255,255,0.5),inset_0_-1px_0_rgba(255,255,255,0.1),inset_0_0_20px_10px_rgba(255,255,255,1)] bg-white/15 backdrop-blur-[20px] before:content-[''] before:absolute before:top-0 before:left-0 before:right-0 before:h-[1px] before:bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.8),transparent)] after:content-[''] after:absolute after:top-0 after:left-0 after:w-[1px] after:h-full after:bg-[linear-gradient(180deg,rgba(255,255,255,0.8),transparent,rgba(255,255,255,0.3))]">
+<h3>Hello Efa  select a chat to message</h3>
+</div>
 
-      </div>
 
     </div>
   )

@@ -8,8 +8,8 @@ export const signup = async (req,res) => {
     try{
         const {fullName,username,password,confirmPassword,gender} = req.body;
 
-        if(password != confirmPassword){
-            return res.status(400).json({error:"password don't match"})
+        if(password !== confirmPassword){
+            return res.status(400).json({error:"password don't match from server"})
         }
 
         const user = await User.findOne({username})
@@ -22,7 +22,7 @@ export const signup = async (req,res) => {
         const avatarSeed = username || uuid()
         const avatarUrl = `https://api.dicebear.com/7.x/adventurer/svg?seed=${avatarSeed}`
 
-        const newUser = await new User({
+        const newUser =  new User({
             fullName,
             username,
             password:hashedPassword,

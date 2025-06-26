@@ -12,7 +12,7 @@ const MessageInput = () => {
                 />
                 <button
                 type="submit"
-                className="absolute inset-y-0 end-0 flex items-center p-2"
+                className="absolute inset-y-0 end-0 flex items-center p-2 text-white"
                 >
 <Send />
       </button>

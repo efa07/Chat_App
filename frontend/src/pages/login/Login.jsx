@@ -1,5 +1,4 @@
-import React from "react";
-
+import { Link } from "react-router-dom";
 export default function LoginPage() {
   return (
     <>
@@ -53,9 +52,9 @@ export default function LoginPage() {
 
           <p className="mt-4 text-sm text-center text-gray-600">
             Not a member?{" "}
-            <a href="#" className="font-semibold text-black hover:underline">
+            <Link to="/signup" className="font-semibold text-black hover:underline">
               Create an account
-            </a>
+            </Link>
           </p>
         </form>
       </div>
@@ -68,10 +67,11 @@ export default function LoginPage() {
           className="absolute w-full h-full object-cover rounded-3xl"
         />
         <div className="z-10 absolute bottom-4 left-4 text-white text-center align-bottom">
-          <h3 className="text-2xl md:text-3xl font-extralight">
-            Be a Part of <br />
-            Something <span className="text-white font-bold">Beautiful</span>
-          </h3>
+         <h3 className="text-2xl md:text-3xl font-extralight ">
+              Be part of the
+              <br />
+              <span className="text-3xl font-bold text-rose/60 backdrop-blur-sm drop-shadow-lg bg-black rounded-2xl px-4">community!</span>
+            </h3>
         </div>
       </div>
     </div>
