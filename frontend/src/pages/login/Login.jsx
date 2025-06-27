@@ -1,5 +1,16 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import useLogin from "../../Hooks/useLoginHook"
+import { ClipLoader } from "react-spinners";
+
 export default function LoginPage() {
+  const [username,setUsername] = useState("")
+  const [password, setPassword] = useState("")
+  const {loading,login} = useLogin()
+  const handleLogin = async (e) => {
+    e.preventDefault()
+    await login(username,password)
+  }
   return (
     <>
     <img
@@ -13,15 +24,17 @@ export default function LoginPage() {
         <h2 className="text-3xl font-bold mb-2 ">Login</h2>
         <p className="text-gray-900 mb-6">Enter your credentials to get in</p>
 
-        <form className="w-full max-w-sm">
+        <form className="w-full max-w-sm" onSubmit={handleLogin}>
           <div className="mb-4">
             <label className="block text-sm font-medium mb-1" htmlFor="email">
               Email
             </label>
             <input
-              id="email"
-              type="email"
-              placeholder="aimerpaix@gmail.com"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+              id="username"
+              type="text"
+              placeholder="efatest@gmail.com"
               className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-purple-400"
             />
           </div>
@@ -31,6 +44,8 @@ export default function LoginPage() {
               Password
             </label>
             <input
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
               id="password"
               type="password"
               placeholder="••••••"
@@ -44,12 +59,12 @@ export default function LoginPage() {
           </div>
 
           <button
+          disabled={loading}
             type="submit"
             className="w-full bg-black text-white py-2 rounded hover:bg-gray-900 transition duration-300"
           >
-            Login
+            {(loading ? <spna>Loading... </spna>: <span>Login</span>)}
           </button>
-
           <p className="mt-4 text-sm text-center text-gray-600">
             Not a member?{" "}
             <Link to="/signup" className="font-semibold text-black hover:underline">
@@ -61,6 +76,9 @@ export default function LoginPage() {
 
       {/* Right side: Image + Text */}
       <div className=" bg-gray-100 hidden md:flex w-150 relative items-center justify-center overflow-hidden rounded-3xl p-4">
+        {!loading ?
+          <div className="w-full h-full">
+          
         <img
           src="../public/logo.png"
           alt="Login Visual"
@@ -73,7 +91,18 @@ export default function LoginPage() {
               <span className="text-3xl font-bold text-rose/60 backdrop-blur-sm drop-shadow-lg bg-black rounded-2xl px-4">community!</span>
             </h3>
         </div>
+</div>:
+        <div className={`w-full h-full bg-gray-300 opacity-50 z-30 rounded-4xl flex justify-center items-center`}>
+         <ClipLoader 
+          color={'red'}
+        size={150}
+        aria-label="Loading Spinner"
+        data-testid="loader"
+         />
+        </div>
+}
       </div>
+        
     </div>
     </>
   );

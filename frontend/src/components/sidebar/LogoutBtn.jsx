@@ -1,8 +1,12 @@
 import { LogOutIcon } from "lucide-react"
+import {useLogout} from "../../Hooks/useLogoutHook"
 const LogoutBtn = () => {
+  const {logout}  = useLogout()
   return (
     <div className='mt-auto pt-2'>
-        <LogOutIcon className="w-6 h-6 cursor-pointer"/>
+        <LogOutIcon 
+        onClick={logout}
+        className="w-6 h-6 cursor-pointer"/>
     </div>
   )
 }

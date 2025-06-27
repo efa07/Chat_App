@@ -1,8 +1,10 @@
 import { useState } from "react"
 import { toast } from 'react-toastify';
+import { useAuthContext } from "../context/authContext";
 
 const useSignup = () => {
     const [loading, setLoading] = useState(false)
+    const {authUser, setAuthUser} = useAuthContext()
 
     const SignUp = async ( {fullName,username,password,confirmPassword,gender,email}) => {
     const success  = handleInputError( fullName,username,password,confirmPassword,gender,email)
@@ -14,28 +16,28 @@ const useSignup = () => {
                 body: JSON.stringify({fullName,username,password,confirmPassword,gender,email})
                 
             })
-            const data = await res.json()
-           if(data){
-                if(data.error){
-                    toast.error(data.error)
+
+    const data = await res.json()
+        if(data){
+            if(data.error){
+                toast.error(data.error)
                 }else{
                     toast.success("Account created successfully")
-                    window.location.href = "/login"
+                    localStorage.setItem("user",JSON.stringify(data))
+                    setAuthUser(data)
+                    // window.location.href = "/"
                 }
             }
         }catch(error){
             toast.error(error.message)
             setLoading(false)
-
         }
         finally{
             setLoading(false)
         }
-
 }
 return { SignUp, loading }
 }
-
 
 export default useSignup
 
