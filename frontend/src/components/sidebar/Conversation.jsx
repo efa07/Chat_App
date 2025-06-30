@@ -1,18 +1,25 @@
+import useConversion from "../../Store/useConverstion"
 
-const Conversation = () => {
+
+const Conversation = ({conversion}) => {
+  const {selectedConversion,setSelectedConversion} = useConversion()
+  const isSelected = selectedConversion?._id === conversion._id  
+
   return (
     <div>
-<div className='flex gap-2 items-center hover:bg-green-100 rounded p-2 py-1 cursor-pointer'>
-<div className="avatar avatar-online">
+<div 
+onClick={() => setSelectedConversion(conversion)}
+className={`${isSelected ? "bg-blue-300" : " " } flex gap-2 items-center hover:bg-green-100 rounded p-2 py-1 cursor-pointer`}>
+<div className="avatar avatar-online ">
   <div className="w-12 rounded-full">
-    <img src="https://img.daisyui.com/images/profile/demo/gordon@192.webp" />
+    <img src={`${conversion.profilePic}`} />
   </div>
 </div>
 
 <div className='flex flex-col flex-1'>
     <div>
         <p className='font-bold text-gray-600'>
-Efa Tariku
+{conversion.fullName}
         </p>
     </div>
 

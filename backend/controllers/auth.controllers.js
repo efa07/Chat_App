@@ -6,7 +6,7 @@ import generateToken from "../utils/generateToken.js";
 //signup
 export const signup = async (req,res) => {
     try{
-        const {fullName,username,password,confirmPassword,gender} = req.body;
+        const {fullName,username,password,confirmPassword,gender,email} = req.body;
 
         if(password !== confirmPassword){
             return res.status(400).json({error:"password don't match from server"})
@@ -27,7 +27,8 @@ export const signup = async (req,res) => {
             username,
             password:hashedPassword,
             gender,
-            profilePic:avatarUrl
+            profilePic:avatarUrl,
+            email
         })
         if(newUser){
         generateToken(newUser._id,res)
@@ -52,27 +53,32 @@ export const signup = async (req,res) => {
     }
 }
 //login
-export const login = async (req,res) => {
-    try{
-const {username,password} = req.body;
-const user = await User.findOne({username})
-const isPassword = await bcrypt.compare(password,user?.password || "") 
-
-if(!user || !isPassword){
-    res.status(400).json({error:"invalid username or password"})
-}
-generateToken(user._id,res)
-res.status(200).json({
-    _id:user._id,
-    fullName:user.fullName,
-    username:user.username,
-    profilePic:user.profilePic
-})
-    }catch(error){
-console.log(error.message)
-res.status(500).json({error:"internal server error"})
+export const login = async (req, res) => {
+  try {
+    const { username, password } = req.body;
+    const user = await User.findOne({ username });
+    if (!user) {
+      return res.status(400).json({ error: "invalid username or password" });
     }
-}
+
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+      return res.status(400).json({ error: "invalid username or password" });
+    }
+
+    generateToken(user._id, res);
+    res.status(200).json({
+      _id: user._id,
+      fullName: user.fullName,
+      username: user.username,
+      profilePic: user.profilePic
+    });
+  } catch (error) {
+    console.error(error); 
+    res.status(500).json({ error: "internal server error" });
+  }
+};
+
 
 //logout
 export const logout = (req,res) => {

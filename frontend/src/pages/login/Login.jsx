@@ -30,11 +30,12 @@ export default function LoginPage() {
               Email
             </label>
             <input
+            required
             value={username}
             onChange={(e) => setUsername(e.target.value)}
               id="username"
               type="text"
-              placeholder="efatest@gmail.com"
+              placeholder="username"
               className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-purple-400"
             />
           </div>
@@ -44,6 +45,7 @@ export default function LoginPage() {
               Password
             </label>
             <input
+            required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
               id="password"

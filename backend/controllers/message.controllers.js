@@ -57,7 +57,9 @@ const conversation = await Conversation.findOne({
   participants: {$all: [ new mongoose.Types.ObjectId(senderId),
       new mongoose.Types.ObjectId(userChatId),]}
 }).populate("messages")
-
+if (!conversation) {
+    return res.status(404).json({ error: "Conversation not found" });
+  }
 res.status(200).json(conversation.messages)
 
 }catch (error) {
