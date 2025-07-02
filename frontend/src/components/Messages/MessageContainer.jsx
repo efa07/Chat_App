@@ -1,46 +1,61 @@
-import Messages from './Messages'
-import MessageInput from "./MessageInput"
-import useConversion from "../../Store/useConverstion"
-import { useEffect } from 'react'
-import {useAuthContext} from "../../context/authContext"
+import Messages from "./Messages";
+import MessageInput from "./MessageInput";
+import useConversion from "../../Store/useConverstion";
+import { useEffect } from "react";
+import { useAuthContext } from "../../context/authContext";
 
 const MessageContainer = () => {
-    const { authUser } = useAuthContext()
-  const {selectedConversion,setSelectedConversion} = useConversion()
+  const { authUser } = useAuthContext();
+  const { selectedConversion, setSelectedConversion } = useConversion();
 
   useEffect(() => {
-    return () => setSelectedConversion(null)
-  },[setSelectedConversion])
+    return () => setSelectedConversion(null);
+  }, [setSelectedConversion]);
+
   return (
-    <div className='md-min-w-[450px] flex flex-col overflow-auto'>
-       {!selectedConversion ? (<NoChataSelected />)
-       :
+    <div className="flex flex-col h-full min-w-full md:min-w-[450px]">
+      {!selectedConversion ? (
+        <NoChatSelected />
+      ) : (
         <>
-          <div className='bg-slate-400 px-4 py2 mb-2'>
-                <span className='label-text'>To </span>
-                <span className='text-gray-500 font-bold'>{selectedConversion.fullName}</span>
+          {/* Header */}
+          <div className="bg-white border-b border-gray-200 px-4 py-3 shadow-sm">
+            <span className="text-sm text-gray-500">To </span>
+            <span className="font-semibold text-gray-800 text-sm">
+              {selectedConversion.fullName}
+            </span>
           </div>
+
+          {/* Messages list */}
+          <div className="flex-1 overflow-auto px-4 py-2 bg-gray-50">
             <Messages />
-             <MessageInput />
+          </div>
+
+          {/* Input box */}
+          <div className="border-t border-gray-200 px-4 py-3 bg-white">
+            <MessageInput />
+          </div>
         </>
-}
+      )}
     </div>
-      
-  )
-}
+  );
+};
 
-export default MessageContainer
+export default MessageContainer;
 
-const NoChataSelected = () => {
-      const { authUser } = useAuthContext()
+const NoChatSelected = () => {
+  const { authUser } = useAuthContext();
 
   return (
-    <div className='flex items-center justify-center w-full h-full bg-gradient-to-br from-rose-100 to-purple-300 rounded-2xl p-6'>
-      <div className="flex flex-col items-center justify-center w-80 h-96 relative overflow-hidden rounded-2xl border border-white/30 shadow-xl backdrop-blur-md bg-white/20">
-        <h3 className="text-2xl font-bold text-gray-800 mb-2 animate-pulse">👋 Hello {authUser.fullName} !</h3>
-        <p className="text-gray-700 text-center px-4">Select a chat to start messaging and stay connected.</p>
-        <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent pointer-events-none" />
+    <div className="flex items-center justify-center h-full w-full bg-gradient-to-br from-rose-100 to-purple-400 animate-pulse">
+      <div className="text-center max-w-md p-6 rounded-2xl bg-white/30 backdrop-blur-md shadow-xl border border-white/20">
+        <h3 className="text-2xl font-bold text-gray-800  mb-2">
+          👋 Hello {authUser.fullName}!
+        </h3>
+        <p className="text-gray-700">
+          Select a conversation to start chatting.
+        </p>
       </div>
     </div>
-  )
-}
+  );
+};
