@@ -1,7 +1,7 @@
 import mongoose from "mongoose"
 import Conversation from "../models/converstion.model.js"
 import Message from "../models/message.model.js"
-
+import {getReceiverSocketId,io} from "../socket/socket.js"
 export const sendMessage = async (req, res) => {
   try {
     const { message } = req.body
@@ -34,10 +34,16 @@ if (!conversation) {
 
     if (newMessage) {
       conversation.messages.push(newMessage._id)
-      await conversation.save()
     }
 
+
     await Promise.all([newMessage.save(),conversation.save()])
+    
+    const receiverSocketId = getReceiverSocketId(receiverId)
+    if(receiverSocketId) {
+      io.to(receiverSocketId).emit("newMessage",newMessage)
+    }
+    
     res.status(201).json(newMessage)
 
   } catch (error) {

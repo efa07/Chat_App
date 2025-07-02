@@ -2,11 +2,11 @@ import React, { useEffect, useRef } from "react";
 import Message from "./Message";
 import useGetMessages from "../../Hooks/useGetMessages";
 import { ClipLoader } from "react-spinners";
-
+import useListenMessage from "../../Hooks/useListenMessage";
 const Messages = () => {
   const { messages, loading } = useGetMessages();
   const scrollRef = useRef(null);
-
+  useListenMessage()
   // Smooth scroll to bottom on new message
   useEffect(() => {
     if (scrollRef.current) {
