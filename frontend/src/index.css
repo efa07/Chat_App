@@ -2,12 +2,6 @@
 @plugin "daisyui" {
     themes: light --default;
 }
-body {
-	background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("/bg.png");
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: center;
-}
 
 /* Custom Scrollbar (modern + soft) */
 .custom-scrollbar::-webkit-scrollbar {

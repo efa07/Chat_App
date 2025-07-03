@@ -25,7 +25,6 @@ const useSignup = () => {
                     toast.success("Account created successfully")
                     localStorage.setItem("user",JSON.stringify(data))
                     setAuthUser(data)
-                    // window.location.href = "/"
                 }
             }
         }catch(error){
