@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { useState,useEffect } from 'react'
 import useSignup from "../../Hooks/userSignupHook"
-
+import logo from '../../assets/logo.png'; 
 const Signup = () => {
   const { SignUp, loading } = useSignup()
   const [input, setInput]  = useState({
@@ -21,7 +21,7 @@ await SignUp(input)
   return (
     <>
       <img
-        src="../public/logo.png"
+        src={logo}
         alt="Login Visual"
         className="-z-1 absolute w-full h-full object-cover"
       />
@@ -136,7 +136,7 @@ await SignUp(input)
         {/* Right side: Image + Text */}
         <div className="bg-white hidden md:flex w-150 relative items-center justify-center overflow-hidden rounded-3xl p-4">
           <img
-            src="../public/logo.png"
+            src={logo}
             alt="Login Visual"
             className="absolute w-full h-full object-cover rounded-3xl"
           />

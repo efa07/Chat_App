@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import useLogin from "../../Hooks/useLoginHook"
 import { ClipLoader } from "react-spinners";
+import logo from '../../assets/logo.png'; 
 
 export default function LoginPage() {
   const [username,setUsername] = useState("")
@@ -14,7 +15,7 @@ export default function LoginPage() {
   return (
     <>
     <img
-          src="../public/logo.png"
+          src={logo}
           alt="Login Visual"
           className="-z-1 absolute w-full h-full object-cover"
         />
@@ -82,7 +83,7 @@ export default function LoginPage() {
           <div className="w-full h-full">
           
         <img
-          src="../public/logo.png"
+          src={logo}
           alt="Login Visual"
           className="absolute w-full h-full object-cover rounded-3xl"
         />
